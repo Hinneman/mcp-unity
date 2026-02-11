@@ -10,7 +10,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
 ### Step-by-Step Instructions
 
 #### Step 1: Focus/Flag Infrastructure
-- [ ] Add the CSS rules below at the end of the existing `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the CSS rules below at the end of the existing `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```css
       .node.flagged{outline:1px solid #ffd580;background:#14283e}
@@ -20,7 +20,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       .focus-btn.focused{color:#ffd580;border-color:#5f4b1c;background:rgba(255,213,128,0.12)}
 ```
 
-- [ ] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       const state = {
@@ -41,7 +41,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       };
 ```
 
-- [ ] Add the focus helpers below immediately after `handleSelection()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the focus helpers below immediately after `handleSelection()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```javascript
       function isFocused(id) {
@@ -59,7 +59,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Replace `renderGameObjectNode()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace `renderGameObjectNode()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       function renderGameObjectNode(node, depth, parentPath, container) {
@@ -120,14 +120,14 @@ If not, move them to the correct branch. If the branch does not exist, create it
 ```
 
 ##### Step 1 Verification Checklist
-- [ ] No build errors
+- [x] No build errors
 - [ ] Clicking the `*` button toggles focus styling on a GameObject node
 
 #### Step 1 STOP & COMMIT
 **STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
 
 #### Step 2: Hierarchy Filtering (Observer Mode)
-- [ ] Replace the Hierarchy card markup with the block below in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Replace the Hierarchy card markup with the block below in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```html
           <div class="card" style="margin-top:12px">
@@ -140,20 +140,20 @@ If not, move them to the correct branch. If the branch does not exist, create it
           </div>
 ```
 
-- [ ] Add the CSS rule below at the end of the existing `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the CSS rule below at the end of the existing `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```css
       .hierarchy-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 ```
 
-- [ ] Add the DOM references below alongside the other element lookups in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the DOM references below alongside the other element lookups in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```javascript
       const focusFilter = document.getElementById('focusFilter');
       const focusCount = document.getElementById('focusCount');
 ```
 
-- [ ] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       const state = {
@@ -175,7 +175,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       };
 ```
 
-- [ ] Add the filtering helpers below immediately after `countGameObjects()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the filtering helpers below immediately after `countGameObjects()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```javascript
       function collectHierarchyIds(hierarchyList) {
@@ -252,7 +252,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Add the filter toggle handler below after the `interval.onchange = scheduleAuto;` line in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the filter toggle handler below after the `interval.onchange = scheduleAuto;` line in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```javascript
       focusFilter.onchange = () => {
@@ -261,7 +261,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       };
 ```
 
-- [ ] Replace `renderHierarchy()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace `renderHierarchy()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       function renderHierarchy(list) {
@@ -302,15 +302,15 @@ If not, move them to the correct branch. If the branch does not exist, create it
 ```
 
 ##### Step 2 Verification Checklist
-- [ ] No build errors
+- [x] No build errors
 - [ ] Toggling "Show only focused" filters the hierarchy and updates the counter
 
 #### Step 2 STOP & COMMIT
 **STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
 
 #### Step 3: Enhanced Context Updates (Deep Trace)
-- [ ] Note: do not modify or replace any existing MCP tools. This step only updates the dashboard UI logic and uses existing tools as-is.
-- [ ] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Note: do not modify or replace any existing MCP tools. This step only updates the dashboard UI logic and uses existing tools as-is.
+- [x] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       const state = {
@@ -337,7 +337,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       };
 ```
 
-- [ ] Add the focus context helpers below after the focus-filter helpers from Step 2 (directly below `updateFocusCounter()`) in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the focus context helpers below after the focus-filter helpers from Step 2 (directly below `updateFocusCounter()`) in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```javascript
       function buildHierarchyIndex(hierarchyList) {
@@ -524,7 +524,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Replace `toggleFocus()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace `toggleFocus()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       function toggleFocus(entry) {
@@ -539,7 +539,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Replace `syncToAgent()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace `syncToAgent()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       async function syncToAgent(source) {
@@ -585,7 +585,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Replace `fetchAll()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace `fetchAll()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       async function fetchAll() {
@@ -632,7 +632,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
 **STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
 
 #### Step 4: Component Analysis (Point and Explain)
-- [ ] Add the Inspector card below after the Hierarchy card in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the Inspector card below after the Hierarchy card in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```html
           <div class="card" style="margin-top:12px">
@@ -641,7 +641,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
           </div>
 ```
 
-- [ ] Add the Inspector CSS rules below at the end of the `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the Inspector CSS rules below at the end of the `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```css
       #inspector{max-height:600px;overflow:auto;font-size:12px}
@@ -656,13 +656,13 @@ If not, move them to the correct branch. If the branch does not exist, create it
       .analyze-btn:hover{border-color:#4fd1c5;color:#e6eef8}
 ```
 
-- [ ] Add the DOM reference below with the other element lookups in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the DOM reference below with the other element lookups in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```javascript
       const inspector = document.getElementById('inspector');
 ```
 
-- [ ] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       const state = {
@@ -690,7 +690,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       };
 ```
 
-- [ ] Add the Inspector rendering helpers below immediately after `refreshFocusedContext()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the Inspector rendering helpers below immediately after `refreshFocusedContext()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```javascript
       async function requestComponentAnalysis(gameObject, component) {
@@ -808,7 +808,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Replace `handleSelection()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace `handleSelection()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       function handleSelection(entry, element) {
@@ -825,7 +825,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Update `refreshFocusedContext()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) by adding the `renderInspector();` call at the end of the `try` block, just before `finally`:
+- [x] Update `refreshFocusedContext()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) by adding the `renderInspector();` call at the end of the `try` block, just before `finally`:
 
 ```javascript
           if (changed) {
@@ -865,7 +865,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
 **STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
 
 #### Step 5: Console Error Push-to-Chat
-- [ ] Add the log action CSS rules below at the end of the `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
+- [x] Add the log action CSS rules below at the end of the `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html):
 
 ```css
       .log-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
@@ -874,7 +874,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       .log-action-btn:hover{border-color:#4fd1c5;color:#e6eef8}
 ```
 
-- [ ] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace the `state` declaration in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       const state = {
@@ -904,13 +904,13 @@ If not, move them to the correct branch. If the branch does not exist, create it
       };
 ```
 
-- [ ] Replace the `get_console_logs` call in `fetchAll()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the line below:
+- [x] Replace the `get_console_logs` call in `fetchAll()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the line below:
 
 ```javascript
         const logsResult = await safeCallTool('get_console_logs', { limit: 200, includeStackTrace: false });
 ```
 
-- [ ] Replace the `updateLogs()` function in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
+- [x] Replace the `updateLogs()` function in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the block below:
 
 ```javascript
       function getLogKey(item) {
@@ -1072,7 +1072,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
       }
 ```
 
-- [ ] Update `fetchAll()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) to await the async log update:
+- [x] Update `fetchAll()` in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) to await the async log update:
 
 ```javascript
         if (logsResult) await updateLogs(logsData);
@@ -1080,7 +1080,7 @@ If not, move them to the correct branch. If the branch does not exist, create it
 ```
 
 ##### Step 5 Verification Checklist
-- [ ] No build errors
+- [x] No build errors
 - [ ] New errors automatically push context with stack frames and GameObject details
 - [ ] Clicking "Push again" on an error re-sends context to the agent
 
