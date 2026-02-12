@@ -5,82 +5,84 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Unity Dashboard</title>
     <style>
-      :root{--bg:#0b1220;--card:#07101a;--muted:#9fb1c9;--accent:#4fd1c5}
-      html,body{height:100%;margin:0}
-      body{font-family:Inter,Segoe UI,Roboto,system-ui,Arial;background:linear-gradient(180deg,#071021 0%,#071627 100%);color:#e6eef8;padding:16px}
-      .app{max-width:1100px;margin:0 auto}
-      header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-      h1{font-size:18px;margin:0}
-      .controls{display:flex;gap:8px}
-      button{background:transparent;border:1px solid #163144;color:var(--muted);padding:6px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;transition:all 0.15s ease}
-      button:active:not(:disabled){transform:scale(0.95);background:rgba(79,209,197,0.1)}
-      button:disabled{opacity:0.3;cursor:not-allowed;border-color:#0a1420}
-      button svg{width:16px;height:16px;fill:currentColor}
-      button.primary{background:var(--accent);color:#022; border-color:transparent}
-      button.primary:active:not(:disabled){background:rgba(79,209,197,0.85)}
-      .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-      .card{background:var(--card);border:1px solid #122432;padding:12px;border-radius:8px}
-      .section-title{font-size:13px;color:var(--muted);margin-bottom:8px}
-      #hierarchy{max-height:800px;overflow:auto;font-size:13px}
-      .node{padding:6px 8px;border-radius:4px;color:#cfe6f8}
-      .node:hover{background:#0f2940}
-      .node.selected{background:#1b3b5a;color:#fff}
-      .node.focused{outline:1px solid #ffd580;background:#14283e}
-      .node.scene{color:#9fc5ff;font-weight:600}
-      .logs{max-height:300px;overflow:auto;font-family:monospace;font-size:12px}
-      .log.info{color:#9fc5ff}
-      .log.warn{color:#ffd580}
-      .log.error{color:#ff9b9b}
-      .meta{font-size:12px;color:var(--muted)}
-      .toolbar{display:flex;gap:8px;align-items:center}
-      label{font-size:12px;color:var(--muted)}
-      input[type=range]{width:120px}
-      .status-row{display:flex;align-items:center;gap:8px;margin-top:6px}
-      .status-badge{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid #214256;color:#cfe6f8;text-transform:uppercase;letter-spacing:0.04em}
-      .status-badge.playing{background:#0f3b2e;border-color:#1f8b6f;color:#a7f3d0}
-      .status-badge.edit{background:#1a2232;border-color:#2a3b55;color:#cbd5e1}
-      .status-badge.compiling{background:#2a1f10;border-color:#a16207;color:#fde68a}
-      .status-badge.failed{background:#3b1313;border-color:#b91c1c;color:#fecaca}
-      .status-badge.success{background:#0f2b1c;border-color:#22c55e;color:#bbf7d0}
-      .spinner{width:10px;height:10px;border:2px solid #a16207;border-top-color:transparent;border-radius:50%;display:inline-block;animation:spin 1s linear infinite}
-      @keyframes spin{to{transform:rotate(360deg)}}
-      .logs-panel{position:fixed;bottom:0;left:0;right:0;background:#0a1420;border-top:2px solid #1a3a5a;max-height:400px;overflow:auto;font-family:monospace;font-size:11px;z-index:9998;display:none}
-      .logs-panel.visible{display:block}
-      .logs-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#0f1c2e;border-bottom:1px solid #1a3a5a}
-      .logs-title{color:#4fd1c5;font-weight:600;font-size:12px}
-      .logs-content{padding:8px 12px}
-      .debug-panel{position:fixed;bottom:0;left:0;right:0;background:#0a1420;border-top:2px solid #1a3a5a;max-height:300px;overflow:auto;font-family:monospace;font-size:11px;z-index:9999;display:none}
-      .debug-panel.visible{display:block}
-      .debug-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#0f1c2e;border-bottom:1px solid #1a3a5a}
-      .debug-title{color:#4fd1c5;font-weight:600;font-size:12px}
-      .debug-content{padding:8px 12px}
-      .debug-log{padding:4px 0;color:#9fc5ff;border-bottom:1px solid #0f1c2e}
-      .debug-log.error{color:#ff9b9b}
-      .debug-log.success{color:#a7f3d0}
-      .panel-toggle{position:fixed;bottom:12px;right:12px;background:#1a3a5a;border:1px solid #2a4a6a;color:#4fd1c5;padding:8px;border-radius:6px;cursor:pointer;z-index:10000;font-size:11px;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
-      .panel-toggle svg{width:18px;height:18px;fill:currentColor}
-      .panel-toggle.logs{right:64px}
-      .node.flagged{outline:1px solid #ffd580;background:#14283e}
-      .node-row{display:flex;align-items:center;gap:6px}
-      .focus-btn{background:#0c1b2a;border:1px solid #1f3750;color:#5f6f84;padding:2px 6px;border-radius:6px;font-size:12px;min-width:20px;height:20px;line-height:1}
-      .focus-btn:hover{border-color:#4fd1c5;color:#e6eef8}
-      .focus-btn.focused{color:#ffd580;border-color:#5f4b1c;background:rgba(255,213,128,0.12)}
-      .hierarchy-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-      #inspector{max-height:600px;overflow:auto;font-size:12px}
-      .inspector-empty{color:var(--muted);font-size:12px;padding:6px 0}
-      .component{border:1px solid #142a3d;background:#0b1726;padding:8px;border-radius:6px;margin:8px 0}
-      .component-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
-      .component-title{font-size:12px;color:#cfe6f8}
-      .component-meta{font-size:11px;color:var(--muted)}
-      .component-props{background:#0a1420;border:1px solid #122432;border-radius:6px;padding:8px;white-space:pre-wrap;font-family:monospace;font-size:11px;color:#9fc5ff;margin:0}
-      .analysis-note{margin-top:6px;padding:6px;background:#0f2234;border:1px dashed #27425c;border-radius:6px;font-size:11px;color:#a7f3d0}
-      .analyze-btn{background:#0c1b2a;border:1px solid #1f3750;color:#9fb1c9;padding:4px 8px;border-radius:6px;font-size:11px;height:24px}
-      .analyze-btn:hover{border-color:#4fd1c5;color:#e6eef8}
-      .log-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-      .log-actions{display:flex;align-items:center;gap:6px}
-      .log-action-btn{background:#0c1b2a;border:1px solid #1f3750;color:#9fb1c9;padding:2px 6px;border-radius:6px;font-size:10px;height:22px}
-      .log-action-btn:hover{border-color:#4fd1c5;color:#e6eef8}
-    </style>
+  :root{--bg:#0b1220;--card:#07101a;--muted:#9fb1c9;--accent:#4fd1c5}
+  html,body{height:100%;margin:0;overflow:hidden}
+  body{font-family:Inter,Segoe UI,Roboto,system-ui,Arial;background:linear-gradient(180deg,#071021 0%,#071627 100%);color:#e6eef8;padding:8px;display:flex;flex-direction:column}
+  .app{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;height:100%;width:100%}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-shrink:0}
+  h1{font-size:18px;margin:0}
+  .controls{display:flex;gap:8px}
+  button{background:transparent;border:1px solid #163144;color:var(--muted);padding:6px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;transition:all 0.15s ease}
+  button:active:not(:disabled){transform:scale(0.95);background:rgba(79,209,197,0.1)}
+  button:disabled{opacity:0.3;cursor:not-allowed;border-color:#0a1420}
+  button svg{width:16px;height:16px;fill:currentColor}
+  button.primary{background:var(--accent);color:#022; border-color:transparent}
+  button.primary:active:not(:disabled){background:rgba(79,209,197,0.85)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;min-height:0}
+  .grid>div{display:flex;flex-direction:column;min-height:0}
+  .card{background:var(--card);border:1px solid #122432;padding:8px;border-radius:8px;display:flex;flex-direction:column;min-height:0;flex:1}
+  .section-title{font-size:13px;color:var(--muted);margin-bottom:4px;flex-shrink:0}
+  .section-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  #hierarchy{flex:1;overflow:auto;font-size:13px;min-height:0}
+  .node{padding:6px 8px;border-radius:4px;color:#cfe6f8}
+  .node:hover{background:#0f2940}
+  .node.selected{background:#1b3b5a;color:#fff}
+  .node.focused{outline:1px solid #ffd580;background:#14283e}
+  .node.scene{color:#9fc5ff;font-weight:600}
+  .logs{max-height:300px;overflow:auto;font-family:monospace;font-size:12px}
+  .log.info{color:#9fc5ff}
+  .log.warn{color:#ffd580}
+  .log.error{color:#ff9b9b}
+  .meta{font-size:12px;color:var(--muted)}
+  .toolbar{display:flex;gap:6px;align-items:center}
+  label{font-size:12px;color:var(--muted)}
+  input[type=range]{width:120px}
+  .status-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .status-badge{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid #214256;color:#cfe6f8;text-transform:uppercase;letter-spacing:0.04em}
+  .status-badge.playing{background:#0f3b2e;border-color:#1f8b6f;color:#a7f3d0}
+  .status-badge.edit{background:#1a2232;border-color:#2a3b55;color:#cbd5e1}
+  .status-badge.compiling{background:#2a1f10;border-color:#a16207;color:#fde68a}
+  .status-badge.failed{background:#3b1313;border-color:#b91c1c;color:#fecaca}
+  .status-badge.success{background:#0f2b1c;border-color:#22c55e;color:#bbf7d0}
+  .spinner{width:10px;height:10px;border:2px solid #a16207;border-top-color:transparent;border-radius:50%;display:inline-block;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .logs-panel{position:fixed;bottom:0;left:0;right:0;background:#0a1420;border-top:2px solid #1a3a5a;max-height:300px;overflow:auto;font-family:monospace;font-size:11px;z-index:9998;display:none}
+  .logs-panel.visible{display:block}
+  .logs-header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:#0f1c2e;border-bottom:1px solid #1a3a5a}
+  .logs-title{color:#4fd1c5;font-weight:600;font-size:12px}
+  .logs-content{padding:6px 10px}
+  .debug-panel{position:fixed;bottom:0;left:0;right:0;background:#0a1420;border-top:2px solid #1a3a5a;max-height:260px;overflow:auto;font-family:monospace;font-size:11px;z-index:9999;display:none}
+  .debug-panel.visible{display:block}
+  .debug-header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:#0f1c2e;border-bottom:1px solid #1a3a5a}
+  .debug-title{color:#4fd1c5;font-weight:600;font-size:12px}
+  .debug-content{padding:6px 10px}
+  .debug-log{padding:4px 0;color:#9fc5ff;border-bottom:1px solid #0f1c2e}
+  .debug-log.error{color:#ff9b9b}
+  .debug-log.success{color:#a7f3d0}
+  .panel-toggle{position:fixed;bottom:10px;right:10px;background:#1a3a5a;border:1px solid #2a4a6a;color:#4fd1c5;padding:6px;border-radius:6px;cursor:pointer;z-index:10000;font-size:11px;width:36px;height:36px;display:flex;align-items:center;justify-content:center}
+  .panel-toggle svg{width:18px;height:18px;fill:currentColor}
+  .panel-toggle.logs{right:54px}
+  .node.flagged{outline:1px solid #ffd580;background:#14283e}
+  .node-row{display:flex;align-items:center;gap:6px}
+  .focus-btn{background:#0c1b2a;border:1px solid #1f3750;color:#5f6f84;padding:2px 6px;border-radius:6px;font-size:12px;min-width:20px;height:20px;line-height:1}
+  .focus-btn:hover{border-color:#4fd1c5;color:#e6eef8}
+  .focus-btn.focused{color:#ffd580;border-color:#5f4b1c;background:rgba(255,213,128,0.12)}
+  .hierarchy-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-shrink:0}
+  #inspector{flex:1;overflow:auto;font-size:12px;min-height:0}
+  .inspector-empty{color:var(--muted);font-size:12px;padding:6px 0}
+  .component{border:1px solid #142a3d;background:#0b1726;padding:8px;border-radius:6px;margin:6px 0}
+  .component-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+  .component-title{font-size:12px;color:#cfe6f8}
+  .component-meta{font-size:11px;color:var(--muted)}
+  .component-props{background:#0a1420;border:1px solid #122432;border-radius:6px;padding:8px;white-space:pre-wrap;font-family:monospace;font-size:11px;color:#9fc5ff;margin:0}
+  .analysis-note{margin-top:6px;padding:6px;background:#0f2234;border:1px dashed #27425c;border-radius:6px;font-size:11px;color:#a7f3d0}
+  .analyze-btn{background:#0c1b2a;border:1px solid #1f3750;color:#9fb1c9;padding:4px 8px;border-radius:6px;font-size:11px;height:24px}
+  .analyze-btn:hover{border-color:#4fd1c5;color:#e6eef8}
+  .log-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+  .log-actions{display:flex;align-items:center;gap:6px}
+  .log-action-btn{background:#0c1b2a;border:1px solid #1f3750;color:#9fb1c9;padding:2px 6px;border-radius:6px;font-size:10px;height:22px}
+  .log-action-btn:hover{border-color:#4fd1c5;color:#e6eef8}
+</style>
   </head>
   <body>
     <div class="app">
@@ -118,29 +120,27 @@
       </header>
 
       <div class="grid">
-        <div>
-          <div class="card">
-            <div class="section-title">Scene</div>
-            <div id="sceneInfo" class="meta">Loading scene info...</div>
-          </div>
-
-          <div class="card" style="margin-top:12px">
-            <div class="section-title">Hierarchy</div>
-            <div class="hierarchy-toolbar">
-              <label class="meta"><input id="focusFilter" type="checkbox" /> Show only focused</label>
-              <span id="focusCount" class="meta"></span>
-            </div>
-            <div id="hierarchy">Loading hierarchy...</div>
-          </div>
-        </div>
-
-        <div>
-          <div class="card">
-            <div class="section-title">Inspector</div>
-            <div id="inspector" class="meta">Select a focused GameObject to inspect.</div>
-          </div>
-        </div>
+  <div>
+    <div class="card">
+      <div class="section-title section-title-row">
+        <span>Hierarchy</span>
+        <span id="sceneInfo" class="meta">Loading scene info...</span>
       </div>
+      <div class="hierarchy-toolbar">
+        <label class="meta"><input id="focusFilter" type="checkbox" /> Show only focused</label>
+        <span id="focusCount" class="meta"></span>
+      </div>
+      <div id="hierarchy">Loading hierarchy...</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="section-title">Inspector</div>
+      <div id="inspector" class="meta">Select a focused GameObject to inspect.</div>
+    </div>
+  </div>
+</div>
     </div>
 
     <button id="logsToggle" class="panel-toggle logs" title="Console Logs">

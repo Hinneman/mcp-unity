@@ -15,10 +15,6 @@
                           */(((((/.   *((((((*.                             
                      .*((((((((((/.   *((((((((((/.                         
                  ./((((((((((((((/    *((((((((((((((/,                     
-
-### Keeping the dashboard visible (VS Code)
-
-In VS Code, MCP Apps can be opened as a persistent editor tab.
              ,/(((((((((((((/*.           */(((((((((((((/*.                
             ,%%#((/((((((*                    ,/(((((/(#&@@(                
             ,%%##%%##((((((/*.             ,/((((/(#&@@@@@@(                
@@ -46,6 +42,8 @@ In VS Code, MCP Apps can be opened as a persistent editor tab.
 ```       
 
 MCP Unity is an implementation of the Model Context Protocol for Unity Editor, allowing AI assistants to interact with your Unity projects. This package provides a bridge between Unity and a Node.js server that implements the MCP protocol, enabling AI agents like Cursor, Windsurf, Claude Code, Codex CLI, GitHub Copilot, and Google Antigravity to execute operations within the Unity Editor.
+
+MCP App enabled for VS Code and Github Copilot.
 
 ## Features
 
