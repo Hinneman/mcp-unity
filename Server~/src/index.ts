@@ -39,6 +39,13 @@ import { registerGetGameObjectResource } from './resources/getGameObjectResource
 import { registerUnityDashboardAppResource } from './resources/unityDashboardAppResource.js';
 import { registerGameObjectHandlingPrompt } from './prompts/gameobjectHandlingPrompt.js';
 import { registerUnityDashboardPrompt } from './prompts/unityDashboardPrompt.js';
+import { registerGetConsoleLogsCompactTool } from './tools/custom/getConsoleLogsCompactTool.js';
+import { registerGetScenesHierarchyCompactTool } from './tools/custom/getScenesHierarchyCompactTool.js';
+import { registerGetGameObjectCompactTool } from './tools/custom/getGameObjectCompactTool.js';
+import { registerCachedLogsResource } from './resources/custom/cachedLogsResource.js';
+import { registerCachedHierarchyResource } from './resources/custom/cachedHierarchyResource.js';
+import { registerCachedGameObjectResource } from './resources/custom/cachedGameObjectResource.js';
+import { registerCompactToolsPrompt } from './prompts/custom/compactToolsPrompt.js';
 
 // Initialize loggers
 const serverLogger = new Logger('Server', LogLevel.INFO);
@@ -101,6 +108,12 @@ registerGetMaterialInfoTool(server, mcpUnity, toolLogger);
 // Register Batch Execute Tool (high-priority for performance)
 registerBatchExecuteTool(server, mcpUnity, toolLogger);
 
+// ========== CUSTOM TOOLS (Fork-specific - Context Optimization) ==========
+registerGetConsoleLogsCompactTool(server, mcpUnity, toolLogger);
+registerGetScenesHierarchyCompactTool(server, mcpUnity, toolLogger);
+registerGetGameObjectCompactTool(server, mcpUnity, toolLogger);
+// =======================================================================
+
 // Register all resources into the MCP server
 registerGetTestsResource(server, mcpUnity, resourceLogger);
 registerGetGameObjectResource(server, mcpUnity, resourceLogger);
@@ -111,9 +124,16 @@ registerGetPackagesResource(server, mcpUnity, resourceLogger);
 registerGetAssetsResource(server, mcpUnity, resourceLogger);
 registerUnityDashboardAppResource(server, resourceLogger);
 
+// ========== CUSTOM RESOURCES (Fork-specific - Context Optimization) ==========
+registerCachedLogsResource(server, resourceLogger);
+registerCachedHierarchyResource(server, resourceLogger);
+registerCachedGameObjectResource(server, resourceLogger);
+// ===========================================================================
+
 // Register all prompts into the MCP server
 registerGameObjectHandlingPrompt(server);
 registerUnityDashboardPrompt(server);
+registerCompactToolsPrompt(server);
 
 // Server startup function
 async function startServer() {

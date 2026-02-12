@@ -139,6 +139,10 @@ Node reads config from `../ProjectSettings/McpUnitySettings.json` relative to **
 - `unload_scene` — Unload scene from hierarchy
 - `get_gameobject` — Get detailed GameObject info
 - `get_console_logs` — Retrieve Unity console logs
+ - `get_console_logs` — Retrieve Unity console logs
+ - `get_console_logs_compact` — Compact console logs with summary and cached details
+ - `get_scenes_hierarchy_compact` — Compact scene hierarchy with summary and cached details
+ - `get_gameobject_compact` — Compact GameObject details with cached full output
 - `recompile_scripts` — Recompile all project scripts
 - `duplicate_gameobject` — Duplicate GameObjects with optional rename/reparent
 - `delete_gameobject` — Delete GameObjects from scene
@@ -160,10 +164,15 @@ Node reads config from `../ProjectSettings/McpUnitySettings.json` relative to **
 - `unity://assets` — Asset database information
 - `unity://tests/{testMode}` — Test Runner test information
 - `unity://ui/dashboard` — Unity dashboard MCP App UI
+ - `unity://ui/dashboard` — Unity dashboard MCP App UI
+ - `unity://logs/cached/{sessionId}` — Cached console logs from compact tool
+ - `unity://hierarchy/cached/{hierarchyId}` — Cached scene hierarchy from compact tool
+ - `unity://gameobject/cached/{cacheId}` — Cached GameObject details from compact tool
 
 ### Available prompts (current)
 - `unity_dashboard` — Opens Unity dashboard MCP app with guided information about features
 - `gameobject_handling_strategy` — Provides structured workflow for GameObject operations
+ - `unity_compact_tools` — Guidance on compact tool usage and when to request full data
 
 ### Update policy (for agents)
 - Update this file when:
