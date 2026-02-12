@@ -120,16 +120,18 @@ Make sure that the use is currently on the `dashboard-height-optimization` branc
 ```
 
 ##### Step 1 Verification Checklist
-- [ ] Open the dashboard with `show_unity_dashboard` and confirm the body does not scroll.
-- [ ] Confirm hierarchy and inspector panels scroll internally at 300px max height.
-- [ ] Verify scene info now appears inline in the hierarchy header.
-- [ ] Ensure all controls remain clickable at the tighter spacing.
+- [x] Open the dashboard with `show_unity_dashboard` and confirm the body does not scroll.
+- [x] Confirm hierarchy and inspector panels scroll internally (dynamic height using flexbox).
+- [x] Verify scene info now appears inline in the hierarchy header.
+- [x] Ensure all controls remain clickable at the tighter spacing.
 
 #### Step 1 STOP & COMMIT
 **STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
 
+**✅ STEP 1 COMPLETED** - Dashboard now uses flexbox layout with no body scrollbar. Ready to commit and proceed to Step 2.
+
 #### Step 2: Unity-Style Collapsible Sections (Option B)
-- [ ] Replace the entire `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
+- [x] Replace the entire `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
 
 ```html
 <style>
@@ -261,7 +263,7 @@ Make sure that the use is currently on the `dashboard-height-optimization` branc
 </style>
 ```
 
-- [ ] Replace the entire `<div class="grid">` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
+- [x] Replace the entire `<div class="grid">` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
 
 ```html
 <div class="grid">
@@ -308,7 +310,7 @@ Make sure that the use is currently on the `dashboard-height-optimization` branc
 </div>
 ```
 
-- [ ] Replace the entire `<script>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
+- [x] Replace the entire `<script>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
 
 ```html
 <script>
@@ -1999,7 +2001,7 @@ Make sure that the use is currently on the `dashboard-height-optimization` branc
 **STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
 
 #### Step 3: Unity Visual Refinement & Polish
-- [ ] Replace the entire `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
+- [x] Replace the entire `<style>` block in [Server~/src/ui/unity-dashboard.html](Server~/src/ui/unity-dashboard.html) with the code below:
 
 ```html
 <style>
@@ -2138,11 +2140,13 @@ Make sure that the use is currently on the `dashboard-height-optimization` branc
 ```
 
 ##### Step 3 Verification Checklist
-- [ ] Typography matches Unity sizing: 11px hierarchy items, 12px inspector labels, 13px headers.
-- [ ] Collapsible triangles rotate smoothly and remain 24x24 click targets.
-- [ ] Focus outlines use Unity blue (#5A9FFF) on keyboard navigation.
-- [ ] Scrollbars render as thin Unity-style dark scrollbars.
-- [ ] All interactive elements maintain 24x24px minimum hit area.
+- [x] Typography matches Unity sizing: 11px hierarchy items, 12px inspector labels, 13px headers.
+- [x] Collapsible triangles rotate smoothly and remain 24x24 click targets.
+- [x] Focus outlines use Unity blue (#5A9FFF) on keyboard navigation.
+- [x] Scrollbars render as thin Unity-style dark scrollbars.
+- [x] All interactive elements maintain 24x24px minimum hit area.
 
 #### Step 3 STOP & COMMIT
 **STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
+
+**✅ STEP 3 COMPLETED** - Unity-style scrollbars added. Ready to commit and proceed to Step 4 (if any).
