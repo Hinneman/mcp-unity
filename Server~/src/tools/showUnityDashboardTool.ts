@@ -3,7 +3,6 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { Logger } from '../utils/logger.js';
 import { registerAppTool } from '@modelcontextprotocol/ext-apps/server';
-import { readUnityDashboardHtml } from '../resources/unityDashboardAppResource.js';
 
 const toolName = 'show_unity_dashboard';
 const toolDescription = 'Opens the Unity dashboard MCP App in VS Code.';
@@ -34,29 +33,14 @@ export function registerShowUnityDashboardTool(server: McpServer, logger: Logger
 }
 
 async function toolHandler(): Promise<CallToolResult> {
-  const { text, mimeType } = readUnityDashboardHtml();
-  const appUri = 'ui://unity-dashboard';
-
+  // registerAppTool handles resource fetching automatically
+  // The MCP host will fetch ui://unity-dashboard resource
   return {
     content: [
       {
-        type: 'resource',
-        resource: {
-          uri: appUri,
-          mimeType,
-          text,
-          _meta: {
-            view: 'mcp-app',
-            ui: true
-          }
-        }
+        type: 'text',
+        text: 'Unity Dashboard opened successfully'
       }
-    ],
-    _meta: {
-      ui: {
-        resourceUri: appUri,
-        title: 'Unity Dashboard'
-      }
-    }
+    ]
   };
 }

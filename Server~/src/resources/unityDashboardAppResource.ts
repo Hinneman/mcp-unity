@@ -24,7 +24,7 @@ export function registerUnityDashboardAppResource(server: McpServer, logger: Log
     },
     async () => {
       try {
-        return readDashboardHtml();
+        return await readDashboardHtml();
       } catch (error) {
         logger.error(`Error reading dashboard HTML: ${error}`);
         throw error;
@@ -42,7 +42,7 @@ export function registerUnityDashboardAppResource(server: McpServer, logger: Log
     },
     async () => {
       try {
-        return readDashboardHtml(legacyResourceUri);
+        return await readDashboardHtml(legacyResourceUri);
       } catch (error) {
         logger.error(`Error reading dashboard HTML (legacy uri): ${error}`);
         throw error;
@@ -51,7 +51,7 @@ export function registerUnityDashboardAppResource(server: McpServer, logger: Log
   );
 }
 
-function readDashboardHtml(uriOverride?: string): ReadResourceResult {
+async function readDashboardHtml(uriOverride?: string): Promise<ReadResourceResult> {
   const { text } = readUnityDashboardHtml();
   const uri = uriOverride ?? appResourceUri;
 
